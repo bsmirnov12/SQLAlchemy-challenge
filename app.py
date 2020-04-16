@@ -115,6 +115,7 @@ def stations():
     res_lst = []
     # create a dictionary from the row data and append it to a list of stations
     for station in stations:
+
         station_dict = {}
         station_dict['station'] = station.station
         station_dict['name'] = station.name
@@ -122,6 +123,15 @@ def stations():
         station_dict['longitude'] = station.longitude
         station_dict['elevation'] = station.elevation
         res_lst.append(station_dict)
+
+        # Experimental cheating solution
+        # Advantages: do not need to type key:value pairs
+        # Disadvantages: some leftover keys are present, problems with key sorting
+        """
+        station_dict = dict(station.__dict__)
+        del station_dict['_sa_instance_state']
+        res_lst.append(station_dict)
+        """
 
     return jsonify(res_lst)
 
